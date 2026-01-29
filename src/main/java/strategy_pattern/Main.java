@@ -9,16 +9,18 @@ public class Main {
         ShoppingCart debtOrder = new ShoppingCart(PaymentMethod.DEBIT_CARD, getProducts()); // 5%
         ShoppingCart cashOrder = new ShoppingCart(PaymentMethod.CASH, getProducts()); // 10%
 
+        printResult(creditOrder);
+        printResult(debtOrder);
         printResult(cashOrder);
     }
 
-    public static void printResult(ShoppingCart order) {
-        System.out.println("--------------------------------------------------");
-        System.out.println("Total price: $"
-                + order.calculateTotalPrice());
+    public static void printResult(ShoppingCart shoppingCart) {
+        var order = shoppingCart.getOrder();
+        System.out.printf("------ %s ------%n", order.getPaymentMethod());
+        System.out.println("Total price: $" + order.getTotalPrice());
         System.out.println("Total price with discount: $"
-                + order.calculatePriceAfterDiscountIfStatements());
-        System.out.println("--------------------------------------------------");
+                + shoppingCart.calculatePriceAfterDiscountIfStatements());
+        System.out.printf("%n");
     }
 
     public static List<Product> getProducts() {

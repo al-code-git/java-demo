@@ -1,5 +1,6 @@
 package strategy_pattern;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Order {
@@ -11,8 +12,10 @@ public class Order {
         this.paymentMethod = paymentMethod;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public BigDecimal getTotalPrice() {
+        return products.stream()
+                .map(Product::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public PaymentMethod getPaymentMethod() {
